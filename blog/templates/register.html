@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<form action="" method="post">
+    {{form.csrf_token}}
+    {{form.username.label}}{{form.username}}
+    {{form.email.label}}{{form.email}}
+    {{form.password.label}}{{form.password}}
+    {{form.confirm_password.label}}{{form.confirm_password}}
+    {{form.first_name.label}}{{form.first_name}}
+    {{form.last_name.label}}{{form.last_name}}
+    {{form.mobile_phone.label}}{{form.mobile_phone}}
+    <input type="submit" value="Register">
+</form>
+
+{% endblock content %}

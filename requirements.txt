@@ -10,3 +10,5 @@ Werkzeug==1.0.1
 Flask-Login
 Flask-WTF
 WTForms
+email_validator
+gunicorn
