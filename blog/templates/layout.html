@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="header">
-            <a href="{{url_for('home')}}">Home</a>
+            <a href="{{url_for('home')}}">Homepage</a>
             <a href="{{url_for('about')}}">About Us</a>   
         {%if current_user.is_authenticated%}
             <span>{{current_user.username}}</span>
