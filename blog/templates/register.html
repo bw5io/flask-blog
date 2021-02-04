@@ -1,5 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
+{% for error in form.username.errors %}
+    <span style="color: red;">{{ error }}</span>
+{% endfor %}
+{% for error in form.email.errors %}
+    <span style="color: red;">{{ error }}</span>
+{% endfor %}
+{% for error in form.password.errors %}
+    <span style="color: red;">{{ error }}</span>
+{% endfor %}
+{% for error in form.confirm_password.errors %}
+    <span style="color: red;">{{ error }}</span>
+{% endfor %}
+{% for error in form.first_name.errors %}
+    <span style="color: red;">{{ error }}</span>
+{% endfor %}
+{% for error in form.last_name.errors %}
+    <span style="color: red;">{{ error }}</span>
+{% endfor %}
+{% for error in form.mobile_phone.errors %}
+    <span style="color: red;">{{ error }}</span>
+{% endfor %}
 
 <form action="" method="post">
     {{form.csrf_token}}
@@ -10,7 +31,7 @@
     {{form.first_name.label}}{{form.first_name}}
     {{form.last_name.label}}{{form.last_name}}
     {{form.mobile_phone.label}}{{form.mobile_phone}}
-    <input type="submit" value="Register">
+    {{form.submit()}}
 </form>
 
 {% endblock content %}

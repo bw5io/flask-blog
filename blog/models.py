@@ -11,6 +11,7 @@ class Post(db.Model):
     content = db.Column(db.Text, nullable=False)
     image_file = db.Column(db.String(40), nullable=False, default='default.jpg')
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    comment=db.relationship('Comment',backref='post',lazy=True)
     def __repr__(self):
         return f"Post('{self.date}', '{self.title}', '{self.content}')"
 
@@ -21,6 +22,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     password = db.Column(db.String(60), nullable=False)
     post = db.relationship('Post', backref='user', lazy=True)
+    comment=db.relationship('Comment',backref='user',lazy=True)
     first_name = db.Column(db.String(80))
     last_name = db.Column(db.String(80))
     mobile_phone = db.Column(db.String(11))
@@ -37,6 +39,18 @@ class User(UserMixin, db.Model):
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash,password)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    content=db.Column(db.Text, nullable=False)
+    parent_id=db.Column(db.Integer, db.ForeignKey('comment.id'), nullable=True)
+    post_id=db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    author_id=db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
+    parent=db.relationship('Comment',backref='comment_parent',remote_side=id,lazy=True)
+
+    def __repr__(self):
+        return f"Post('{self.date}','{self.content}')"
 
 @login_manager.user_loader
 def load_user(user_id):

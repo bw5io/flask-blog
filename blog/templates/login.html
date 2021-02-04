@@ -4,7 +4,7 @@
     {{form.csrf_token}}
     {{form.email.label}}{{form.email}}
     {{form.password.label}}{{form.password}}
-    <input type="submit" value="Login">
+    {{form.submit()}}
 </form>
 
 {% endblock content %}
