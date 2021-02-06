@@ -26,6 +26,7 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String(80))
     last_name = db.Column(db.String(80))
     mobile_phone = db.Column(db.String(11))
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
     def __repr__(self):
         return f"User('{self.username}', '{self.email}')"
 

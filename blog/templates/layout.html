@@ -9,24 +9,34 @@
             My Damn Fine Website
             {%endif%}
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
     </head>
     <body>
-        <div id="header">
-            <a href="{{url_for('home')}}">Homepage</a>
-            <a href="{{url_for('about')}}">About Us</a>   
-        {%if current_user.is_authenticated%}
-            <span>{{current_user.username}}</span>
-            <a href="{{url_for('logout')}}">Log Out</a>
-        {%else%}
-            <a href="{{ url_for('register') }}">Register</a>
-            <a href="{{ url_for('login') }}">Log In</a>
-        {%endif%}
+        <div class="grid-container">
+            <div id="navi">
+                <h1>Bill's Blog</h1>
+                <ul>
+                    {%if current_user.is_authenticated%}
+                    <li>Welcome, {{current_user.username}}!</li>
+                    <li><a href="{{url_for('logout')}}">Log Out</a></li>
+                {%else%}
+                    <li><a href="{{ url_for('register') }}">Register</a></li>
+                    <li><a href="{{ url_for('login') }}">Log In</a></li>
+                {%endif%}
+                    <li>------------</li>
+                    <li><a href="{{url_for('home')}}">Homepage</a></li>
+                    <li><a href="{{url_for('about')}}">About Us</a></li>
+                </ul>
+            </div>
+            <div id="main">
+                {% block content %} {% endblock %}
+            </div>
+            <div id="sidebar">
+                Test
+            </div>
         </div>
-        <div id="content">
-            {% block content %} {% endblock %}
-        </div>
-        <div>
+        <div style="visibility: hidden;">
             {% with messages = get_flashed_messages() %}
                 {%if messages%}
                 <ul class="flashes">
@@ -39,3 +49,4 @@
         </div>
     </body>
 </html>
+

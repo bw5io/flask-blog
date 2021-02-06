@@ -5,12 +5,12 @@ from blog.models import User
 from flask import flash
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=15)])
-    email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired(),Regexp('^(?=.*\d).{6,8}$',message="Your password should be between 6 and 8 characters long.")])
-    confirm_password=PasswordField('Confirm Password', validators=[DataRequired(),EqualTo('password')])
-    first_name = StringField('First Name', validators=[DataRequired()])
-    last_name = StringField('Last Name', validators=[DataRequired()])
+    username = StringField('Username *', validators=[DataRequired(), Length(min=3, max=15)])
+    email = StringField('Email *', validators=[DataRequired(), Email()])
+    password = PasswordField('Password *', validators=[DataRequired(),Regexp('^(?=.*\d).{6,8}$',message="Your password should be between 6 and 8 characters long.")])
+    confirm_password=PasswordField('Confirm Password *', validators=[DataRequired(),EqualTo('password')])
+    first_name = StringField('First Name *', validators=[DataRequired()])
+    last_name = StringField('Last Name *', validators=[DataRequired()])
     mobile_phone = StringField('Mobile Phone')
     submit=SubmitField('Register')
 

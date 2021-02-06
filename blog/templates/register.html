@@ -21,17 +21,17 @@
 {% for error in form.mobile_phone.errors %}
     <span style="color: red;">{{ error }}</span>
 {% endfor %}
-
+<h1>register</h1>
 <form action="" method="post">
     {{form.csrf_token}}
-    {{form.username.label}}{{form.username}}
-    {{form.email.label}}{{form.email}}
-    {{form.password.label}}{{form.password}}
-    {{form.confirm_password.label}}{{form.confirm_password}}
-    {{form.first_name.label}}{{form.first_name}}
-    {{form.last_name.label}}{{form.last_name}}
-    {{form.mobile_phone.label}}{{form.mobile_phone}}
-    {{form.submit()}}
+    <p>{{form.username.label}}{{form.username}}</p>
+    <p>{{form.email.label}}{{form.email}}</p>
+    <p>{{form.password.label}}{{form.password}}</p>
+    <p>{{form.confirm_password.label}}{{form.confirm_password}}</p>
+    <p>{{form.first_name.label}}{{form.first_name}}</p>
+    <p>{{form.last_name.label}}{{form.last_name}}</p>
+    <p>{{form.mobile_phone.label}}{{form.mobile_phone}}</p>
+    <p>{{form.submit()}}</p>
 </form>
 
 {% endblock content %}
