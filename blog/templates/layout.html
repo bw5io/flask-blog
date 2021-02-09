@@ -25,28 +25,34 @@
                     <li><a href="{{ url_for('login') }}">Log In</a></li>
                 {%endif%}
                     <li>------------</li>
-                    <li><a href="{{url_for('home')}}">Homepage</a></li>
-                    <li><a href="{{url_for('about')}}">About Us</a></li>
+                    <li><a href="{{url_for('home')}}">Home</a></li>
+                    <li><a href="{{url_for('about')}}">About</a></li>
+                {% if current_user.is_admin %}
+                    <li>------------</li>
+                    <li><a href="/admin">Admin Panel</a></li>
+                {% endif %}
                 </ul>
             </div>
             <div id="main">
-                {% block content %} {% endblock %}
+                {% block content %} {% endblock content%}
             </div>
             <div id="sidebar">
-                Test
+                {% block sidebar %} {% endblock sidebar%}
             </div>
         </div>
-        <div style="visibility: hidden;">
-            {% with messages = get_flashed_messages() %}
-                {%if messages%}
+        {% with messages = get_flashed_messages() %}
+        {%if messages%}
+        <div id="flash">
                 <ul class="flashes">
                     {%for message in messages%}
-                    <li>{{message}}</li>
+                    <li><strong>{{message}}</strong></li>
                     {%endfor%}
                 </ul>
-                {%endif%}
-            {%endwith%}
+                Click here to close window.
         </div>
+        <script src="{{url_for('static',filename='close.js')}}"></script>
+        {%endif%}
+        {%endwith%}
     </body>
 </html>
 

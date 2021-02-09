@@ -9,7 +9,7 @@
 }
 
 body{
-    background-color: blue;
+    background-color: #02162c;
     color: rgb(207, 207, 207);
     font-family: Dosis, sans-serif;
 }
@@ -30,11 +30,7 @@ img{
     width: 100%;
 }
 
-input{
-    color: blue;
-    background-color: red;
-    border: #02162c 3px;
-}
+
 
 /* Grid Initialize */
 
@@ -51,7 +47,7 @@ input{
 #navi{
     grid-column: 1/2;
     text-align: right;
-    padding-top: 70%;
+    padding-top: 20vh;
 }
 
 #navi ul{
@@ -89,9 +85,83 @@ input{
     font-size: 1.2em;
 }
 
+/* Form Formatting */
+.lb{
+    display: inline-block;
+    width: 10em;
+    color: white;
+    margin-right: 3em;
+    text-align: right;
+}
+
+.inputline{
+    color: white;
+    background-color: black;
+    border: #02162c 3px;
+    padding: 0.3em;
+    margin: 0.3em;
+    font-size:0.9em;
+    width: 15em;
+    font-family: Dosis, sans-serif;
+    text-transform:none;
+}
+
+.btn{
+    color: white;
+    background-color: #1763af;
+    align-self: center;
+    padding: 0.6em;
+    font-family: Dosis, sans-serif;
+    font-weight: 800;
+    font-size: 1em;
+    display: inline-block;
+    border-radius: 0.5em;
+    border: none;
+}
+
+.btn:hover{
+    color: black;
+    background-color: yellow;
+}
+
+.commentform{
+    font-family: Dosis, sans-serif;
+    width: 100vh;
+    height: 20em;
+    margin: 1em;
+    background-color: black;
+    color: lightgrey;
+    border: none;
+    text-transform: none;
+    text-align:left;
+    resize: none;
+}
+
+/* Form Page Formatting */
+.formpage{
+    margin-top:16vh;
+}
+
+.space{
+    margin: 0.6em;
+}
+
+/* Flash Warning */
+#flash{
+    border: solid yellow;
+    color:black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 5vh;
+    background-color: rgba(125,125,125,90%);
+    transform: translate(-50%, -50%);
+}
+
 @media (max-width: 900px){
     .grid-container{
         height: 90vh;
         grid-template-rows: 6fr 1fr;
     }
 }
+

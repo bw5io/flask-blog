@@ -4,24 +4,36 @@
 <h1>{{ post.title }}</h1>
 <p> &nbsp Author: {{ post.user.username }}</p>
 <p>{{ post.content }}</p>
+
+<!-- Comment Section -->
+
+<h1>Comments</h1>
+
 {% for comment in comments %}
-<p>"{{ comment.content }}" &nbsp <small>Author: {{ comment.user.username }}</small></p>
+
+<div class="comment">
+    <p class="title"><strong>{{ comment.user.username }}</strong> commented on {{comment.date}}</p>
+    <p class="content">{{ comment.content }}</p>
+</div>
+
 {% endfor %}
 {%if current_user.is_authenticated%}
 <form method="POST" action="{{ url_for('post_comment', post_id=post.id)}}">
     {{form.csrf_token}}
     <div class="">
         {{ form.comment.label }}
-        {{ form.comment }}
-        {% for error in form.comment.errors %}
-        <span style="color: red;">
-        [{{ error }}]
-        </span> 
-        {% endfor %}
+        {{ form.comment(class_="commentform") }}
     </div>
     <div class="">
-       {{ form.submit() }}
+       {{ form.submit(class_="btn") }}
      </div>
 </form>
-{%endif%}
+{% else %}
+<p>You need to <a href="{{url_for('login')}}">Log In</a> to post comment.</p>
+{% endif %}
 {% endblock content %}
+
+{%block sidebar%}
+    <p id="likenumber"> </p>
+    <p>Like</p>
+{%endblock sidebar%}

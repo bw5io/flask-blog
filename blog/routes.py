@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from blog import app, db
 from blog.models import User, Post, Comment
 from blog.forms import RegistrationForm, LoginForm, CommentForm
-
+from blog.functions import flash_errors
 
 @app.route("/")
 @app.route("/home")
@@ -42,12 +42,12 @@ def register():
         user=User(username=form.username.data,email=form.email.data,password=form.password.data,first_name=form.first_name.data,last_name=form.last_name.data,mobile_phone=form.mobile_phone.data)
         db.session.add(user)
         db.session.commit()
-        return redirect(url_for('register_complete'))
+        login_user(user)
+        flash("Congratulations! Your registration has completed.")
+        return redirect(url_for('home'))
+    else:
+        flash_errors(form)
     return render_template('register.html', title='Register', form=form)
-
-@app.route("/register_complete")
-def register_complete():
-    return render_template('register_complete.html', title='Congratulations!')
 
 @app.route("/login", methods=['GET','POST'])
 def login():
@@ -59,10 +59,17 @@ def login():
             flash("Login Success!")
             return redirect(url_for('home'))
         else:
-            flash("Password not right.")
+            flash("Email or Password incorrect.")
+    else:
+        flash_errors(form)
     return render_template('login.html', title='Login', form=form)
+
+@app.route("/search")
+def search():
+    return render_template('search.html', title='Search')
 
 @app.route("/logout")
 def logout():
     logout_user()
+    flash("You have successfully logged out!")
     return redirect(url_for('home'))

@@ -1,10 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="formpage">
+<h1>Login</h1>
+<div class="space"></div>
 <form action="" method="post">
     {{form.csrf_token}}
-    {{form.email.label}}{{form.email}}
-    {{form.password.label}}{{form.password}}
-    {{form.submit()}}
+    <p>{{form.email.label(class_="lb")}}{{form.email(class_="inputline")}}</p>
+    <p>{{form.password.label(class_="lb")}}{{form.password(class_="inputline")}}</p>
+    <div class="space"></div>
+    <p><a href="{{url_for("register")}}"> Not Registered?</a></p>
+    <div class="space"></div>
+    <p>{{form.submit(class_="btn")}}</p>
 </form>
-
+</div>
 {% endblock content %}

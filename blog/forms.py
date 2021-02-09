@@ -1,14 +1,14 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp, InputRequired
 from blog.models import User
 from flask import flash
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username *', validators=[DataRequired(), Length(min=3, max=15)])
+    username = StringField('Username *', validators=[DataRequired(), Length(min=3, max=15, message="Username should be 3 to 15 characters long.")])
     email = StringField('Email *', validators=[DataRequired(), Email()])
     password = PasswordField('Password *', validators=[DataRequired(),Regexp('^(?=.*\d).{6,8}$',message="Your password should be between 6 and 8 characters long.")])
-    confirm_password=PasswordField('Confirm Password *', validators=[DataRequired(),EqualTo('password')])
+    confirm_password=PasswordField('Confirm Password *', validators=[DataRequired(),EqualTo('password',message="Two Passwords are not the same.")])
     first_name = StringField('First Name *', validators=[DataRequired()])
     last_name = StringField('Last Name *', validators=[DataRequired()])
     mobile_phone = StringField('Mobile Phone')
@@ -30,11 +30,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Login')
 
-    def validate_email(self, email):
-        email=User.query.filter_by(email=email.data).first()
-        if not email:
-            flash('User not exist.')
-
 class CommentForm(FlaskForm):
-    comment = StringField('Comment', validators=[InputRequired()])
+    comment = TextAreaField('Comment', validators=[InputRequired()])
     submit = SubmitField('Post comment')
