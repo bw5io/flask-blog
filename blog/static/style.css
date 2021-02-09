@@ -5,13 +5,13 @@
     padding:0;
     margin:0;
     text-transform: lowercase;
-    /* text-align: center; */
+    font-family: Dosis, sans-serif;
 }
 
 body{
     background-color: #02162c;
     color: rgb(207, 207, 207);
-    font-family: Dosis, sans-serif;
+    
 }
 
 a{
@@ -37,7 +37,6 @@ img{
 .grid-container{
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    /* grid-template-rows: [page-start] 90fr [footer-start] 3fr [footer-end]; */
     grid-gap: 1em;
     width: 100vw;
     height: 100vh;
@@ -57,7 +56,6 @@ img{
 #main{
     grid-column: 2/3;
     text-align: center;
-    /* margin: auto 0; */
     overflow: scroll;
 }
 
@@ -65,12 +63,6 @@ img{
     grid-column:3/4;
     text-align: left;
 }
-
-/* .footer{
-    grid-row: 2/3;
-    grid-column: 2/3;
-    text-align: center;
-} */
 
 .middle{ 
     font-size: 1.5em;
@@ -102,7 +94,6 @@ img{
     margin: 0.3em;
     font-size:0.9em;
     width: 15em;
-    font-family: Dosis, sans-serif;
     text-transform:none;
 }
 
@@ -111,7 +102,6 @@ img{
     background-color: #1763af;
     align-self: center;
     padding: 0.6em;
-    font-family: Dosis, sans-serif;
     font-weight: 800;
     font-size: 1em;
     display: inline-block;
@@ -125,19 +115,20 @@ img{
 }
 
 .commentform{
-    font-family: Dosis, sans-serif;
     width: 100vh;
     height: 20em;
     margin: 1em;
     background-color: black;
     color: lightgrey;
     border: none;
+    /* font-weight: 500; */
+    font-size: 1em;
     text-transform: none;
     text-align:left;
     resize: none;
 }
 
-/* Form Page Formatting */
+/* Login & Register Page Formatting */
 .formpage{
     margin-top:16vh;
 }

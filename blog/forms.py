@@ -31,5 +31,5 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class CommentForm(FlaskForm):
-    comment = TextAreaField('Comment', validators=[InputRequired()])
+    comment = TextAreaField('Comment', validators=[InputRequired()], render_kw={"placeholder":"Input Comment Here."})
     submit = SubmitField('Post comment')
