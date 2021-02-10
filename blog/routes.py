@@ -1,7 +1,7 @@
 from flask import render_template, url_for, flash, request, redirect
 from flask_login import login_user, logout_user, current_user, login_required
 from blog import app, db
-from blog.models import User, Post, Comment
+from blog.models import User, Post, Comment, Like
 from blog.forms import RegistrationForm, LoginForm, CommentForm
 from blog.functions import flash_errors
 
@@ -34,6 +34,20 @@ def post_comment(post_id):
         return redirect(f'/post/{post.id}')
     comments = Comment.query.filter(Comment.post_id == post.id)
     return render_template('post.html', post=post, comments=comments, form=form)
+
+@app.route('/post/<int:post_id>/like')
+@login_required
+def post_like(post_id):
+    post = Post.query.get_or_404(post_id)
+    if not Like.query.filter_by(post_id=post.id, liker_id=current_user.id).all():
+        db.session.add(Like(post_id=post.id, liker_id=current_user.id))
+        post.likes+=1
+        db.session.commit()
+        flash("It Worked!")
+    else:
+        flash("You already liked!")
+    return redirect(f'/post/{post.id}')
+
 
 @app.route("/register", methods=['GET','POST'])
 def register():
