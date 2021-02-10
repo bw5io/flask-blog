@@ -60,6 +60,7 @@ img{
 }
 
 #sidebar{
+    padding-top: 24vh;
     grid-column:3/4;
     text-align: left;
 }
@@ -115,18 +116,38 @@ img{
 }
 
 .commentform{
-    width: 100vh;
+    width: 80%;
     height: 20em;
     margin: 1em;
     background-color: black;
     color: lightgrey;
     border: none;
-    /* font-weight: 500; */
     font-size: 1em;
     text-transform: none;
-    text-align:left;
     resize: none;
 }
+
+
+/* Post Page */
+
+#main_text{
+    text-align:justify;
+}
+
+.comment{
+    margin-bottom: 1em;
+}
+
+.comment_user{
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.comment_content{
+    text-align: left;
+    margin-left: 3em;
+}
+
 
 /* Login & Register Page Formatting */
 .formpage{

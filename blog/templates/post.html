@@ -2,8 +2,7 @@
 {% block content %}
 <img src="{{ url_for('static', filename='img/' + post.image_file)}}">
 <h1>{{ post.title }}</h1>
-<p> &nbsp Author: {{ post.user.username }}</p>
-<p>{{ post.content }}</p>
+<p id="main_text">{{ post.content }}</p>
 
 <!-- Comment Section -->
 
@@ -12,8 +11,8 @@
 {% for comment in comments %}
 
 <div class="comment">
-    <p class="title"><strong>{{ comment.user.username }}</strong> commented on {{comment.date}}</p>
-    <p class="content">{{ comment.content }}</p>
+    <p class="comment_user"><strong>{{ comment.user.username }}</strong> commented on <script> document.write(moment("{{post.date}}").format("LL"));</script></p>
+    <p class="comment_content">{{ comment.content }}</p>
 </div>
 
 {% endfor %}
@@ -21,7 +20,6 @@
 <form method="POST" action="{{ url_for('post_comment', post_id=post.id)}}">
     {{form.csrf_token}}
     <div class="">
-        {{ form.comment.label }}
         {{ form.comment(class_="commentform") }}
     </div>
     <div class="">
@@ -34,6 +32,8 @@
 {% endblock content %}
 
 {%block sidebar%}
-    <p id="likenumber"> </p>
+    <p><strong>Posted on:</strong>  <script>document.write(moment("{{post.date}}").format("LL"));</script></p>
+    <p><strong>Author:</strong> {{post.user.username}}</p>
+    <p id="likenumber">12</p>
     <p>Like</p>
 {%endblock sidebar%}

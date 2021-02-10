@@ -5,13 +5,13 @@ from blog.models import User
 from flask import flash
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username *', validators=[DataRequired(), Length(min=3, max=15, message="Username should be 3 to 15 characters long.")])
+    username = StringField('Username *', validators=[DataRequired(), Length(min=3, max=15, message="Username should be 3 to 15 characters long.")],render_kw={"placeholder":"3 to 15 characters long"})
     email = StringField('Email *', validators=[DataRequired(), Email()])
-    password = PasswordField('Password *', validators=[DataRequired(),Regexp('^(?=.*\d).{6,8}$',message="Your password should be between 6 and 8 characters long.")])
+    password = PasswordField('Password *', validators=[DataRequired(),Regexp('^(?=.*\d).{6,8}$',message="Your password should be between 6 and 8 characters long.")], render_kw={"placeholder":"6 to 8 characters long"})
     confirm_password=PasswordField('Confirm Password *', validators=[DataRequired(),EqualTo('password',message="Two Passwords are not the same.")])
     first_name = StringField('First Name *', validators=[DataRequired()])
     last_name = StringField('Last Name *', validators=[DataRequired()])
-    mobile_phone = StringField('Mobile Phone')
+    mobile_phone = StringField('Mobile Phone', validators=[Length(max=11, message="Mobile Phone number should be 11 digits long.")])
     submit=SubmitField('Register')
 
     def validate_username(self, username):
