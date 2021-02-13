@@ -27,7 +27,7 @@
      </div>
 </form>
 {% else %}
-<p>You need to <a href="{{url_for('login')}}">Log In</a> to post comment.</p>
+<p>You need to <a href="{{ url_for('login')+'?next='+request.path }}">Log In</a> to post comment.</p>
 {% endif %}
 {% endblock content %}
 
@@ -35,5 +35,13 @@
     <p><strong>Posted on:</strong>  <script>document.write(moment("{{post.date}}").format("LL"));</script></p>
     <p><strong>Author:</strong> {{post.user.username}}</p>
     <p id="likenumber">{{post.likes}}</p>
+    {%if current_user.is_authenticated%}
+    {%if like == None%}
     <p><a href="{{url_for('post_like',post_id=post.id)}}">Like</a></p>
+    {%else%}
+    <p>Liked</p>
+    {%endif%}
+    {%else%}
+    <p><a href="{{ url_for('login')+'?next='+request.path }}">Log In</a> to Like.</p>
+    {%endif%}
 {%endblock sidebar%}

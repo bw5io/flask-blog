@@ -148,6 +148,11 @@ img{
     margin-left: 3em;
 }
 
+#likenumber{
+    font-size: 2em;
+    color: yellow;
+}
+
 
 /* Login & Register Page Formatting */
 .formpage{

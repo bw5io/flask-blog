@@ -7,11 +7,11 @@ from flask import flash
 class RegistrationForm(FlaskForm):
     username = StringField('Username *', validators=[DataRequired(), Length(min=3, max=15, message="Username should be 3 to 15 characters long.")],render_kw={"placeholder":"3 to 15 characters long"})
     email = StringField('Email *', validators=[DataRequired(), Email()])
-    password = PasswordField('Password *', validators=[DataRequired(),Regexp('^(?=.*\d).{6,8}$',message="Your password should be between 6 and 8 characters long.")], render_kw={"placeholder":"6 to 8 characters long"})
+    password = PasswordField('Password *', validators=[DataRequired(),Regexp('^(?=.*\d).{8,16}$',message="Your password should be between 8 and 16 characters long.")], render_kw={"placeholder":"8 to 16 characters long"})
     confirm_password=PasswordField('Confirm Password *', validators=[DataRequired(),EqualTo('password',message="Two Passwords are not the same.")])
     first_name = StringField('First Name *', validators=[DataRequired()])
     last_name = StringField('Last Name *', validators=[DataRequired()])
-    mobile_phone = StringField('Mobile Phone', validators=[Length(max=11, message="Mobile Phone number should be 11 digits long.")])
+    mobile_phone = StringField('Mobile Phone', validators=[Regexp('^$|^[0][1-9]\d{9}$|^[1-9]\d{9}$', message="Mobile Phone number should be 10 digits long, or 11 digits long with 0 at the start.")])
     submit=SubmitField('Register')
 
     def validate_username(self, username):

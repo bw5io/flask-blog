@@ -1,0 +1,24 @@
+{% extends "layout.html" %} 
+{% block content %}
+{% for post in posts %}
+    <p> 
+        <a href="{{url_for('post',post_id=post.id)}}">{{ post.title }}</a>  
+    </p>
+    <p>
+        Posted on: {{post.date}}
+    </p>
+    <p>
+        Likes: {{post.likes}}
+    </p>
+{% endfor %}
+
+{% endblock content %}
+{%block sidebar%}
+<div>
+    <p>Sort By:</p>
+    <p>Likes&nbsp;<a href="{{url_for('allpost',type=0,order=1)}}">Asc⬆️</a> <a href="{{url_for('allpost',type=0,order=0)}}">Desc⬇️</a></p>
+    <p>Date&nbsp;<a href="{{url_for('allpost',type=1,order=1)}}">Asc⬆️</a> <a href="{{url_for('allpost',type=1,order=0)}}">Desc⬇️</a></p>
+</div>
+
+{%endblock sidebar%}
+

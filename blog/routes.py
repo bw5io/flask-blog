@@ -1,5 +1,7 @@
 from flask import render_template, url_for, flash, request, redirect
 from flask_login import login_user, logout_user, current_user, login_required
+from sqlalchemy import desc
+from is_safe_url import is_safe_url
 from blog import app, db
 from blog.models import User, Post, Comment, Like
 from blog.forms import RegistrationForm, LoginForm, CommentForm
@@ -19,8 +21,12 @@ def about():
 def post(post_id):
     post=Post.query.get_or_404(post_id)
     comments = Comment.query.filter(Comment.post_id == post.id)
+    if current_user.is_authenticated:
+        like=Like.query.filter(Like.post_id==post.id, Like.liker_id==current_user.id).first()
+    else:
+        like=None
     form = CommentForm()
-    return render_template('post.html',title=post.title, post=post, form=form, comments=comments)
+    return render_template('post.html',title=post.title, post=post, form=form, comments=comments, like=like)
 
 @app.route('/post/<int:post_id>/comment', methods=['GET', 'POST']) 
 @login_required
@@ -43,7 +49,7 @@ def post_like(post_id):
         db.session.add(Like(post_id=post.id, liker_id=current_user.id))
         post.likes+=1
         db.session.commit()
-        flash("It Worked!")
+        flash("Liked!")
     else:
         flash("You already liked!")
     return redirect(f'/post/{post.id}')
@@ -58,7 +64,10 @@ def register():
         db.session.commit()
         login_user(user)
         flash("Congratulations! Your registration has completed.")
-        return redirect(url_for('home'))
+        next=request.args.get('next')
+        if not is_safe_url(next, request.url_root):
+            return redirect(url_for('home'))
+        return redirect(next or url_for('home'))
     else:
         flash_errors(form)
     return render_template('register.html', title='Register', form=form)
@@ -71,7 +80,10 @@ def login():
         if user is not None and user.verify_password(form.password.data): 
             login_user(user)
             flash("Login Success!")
-            return redirect(url_for('home'))
+            next=request.args.get('next')
+            if not is_safe_url(next, request.url_root):
+                return redirect(url_for('home'))
+            return redirect(next or url_for('home'))
         else:
             flash("Email or Password incorrect.")
     else:
@@ -82,8 +94,32 @@ def login():
 def search():
     return render_template('search.html', title='Search')
 
+@app.route("/allpost/<int:type>/<int:order>")
+def allpost(type, order):
+    if type==1:
+        ty=Post.date
+    elif type==0:
+        ty=Post.likes
+    else:
+        return redirect(f"/allpost/0/0")
+    if order==1:
+        post=Post.query.order_by(ty).all()
+    elif order==0:
+        post=Post.query.order_by(desc(ty)).all()
+    else:
+        return redirect(f'/allpost/0/0')
+    return render_template('allpost.html', title='All Posts', posts=post)
+  
+@app.route("/allpost")
+def allpostroot():
+    return redirect(f'/allpost/0/0')
+
+
 @app.route("/logout")
 def logout():
     logout_user()
     flash("You have successfully logged out!")
-    return redirect(url_for('home'))
+    next=request.args.get('next')
+    if not is_safe_url(next, request.url_root):
+        return redirect(url_for('home'))
+    return redirect(next or url_for('home'))

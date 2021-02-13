@@ -1,4 +1,3 @@
-
 document.getElementById("flash").addEventListener("mouseup",close);
 
 function close(){
