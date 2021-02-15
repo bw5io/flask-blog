@@ -21,6 +21,7 @@
                     {%if current_user.is_authenticated%}
                     <li>Welcome, {{current_user.username}}!</li>
                     <li><a href="{{url_for('logout')+'?next='+request.path }}">Log Out</a></li>
+                    <li><a href="{{url_for('tagged')}}">Tagged</a></li>
                 {%else%}
                     <li>Welcome, Guest!</li>
                     <li><a href="{{ url_for('register')+'?next='+request.path}}">Register</a></li>

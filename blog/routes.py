@@ -1,9 +1,9 @@
 from flask import render_template, url_for, flash, request, redirect
 from flask_login import login_user, logout_user, current_user, login_required
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 from is_safe_url import is_safe_url
 from blog import app, db
-from blog.models import User, Post, Comment, Like
+from blog.models import User, Post, Comment, Like, Tag
 from blog.forms import RegistrationForm, LoginForm, CommentForm
 from blog.functions import flash_errors
 
@@ -54,6 +54,23 @@ def post_like(post_id):
         flash("You already liked!")
     return redirect(f'/post/{post.id}')
 
+@app.route('/post/<int:post_id>/tag')
+@login_required
+def post_tag(post_id):
+    post = Post.query.get_or_404(post_id)
+    current_tag=Tag.query.filter_by(post_id=post.id, tagger_id=current_user.id).first()
+    if not current_tag:
+        db.session.add(Tag(post_id=post.id, tagger_id=current_user.id))
+        db.session.commit()
+        flash("Tagged!")
+    else:
+        Tag.query.filter_by(post_id=post.id, tagger_id=current_user.id).delete(synchronize_session=False)
+        db.session.commit()
+        flash("Tag Removed!")
+    next=request.args.get('next')
+    if not is_safe_url(next, request.url_root):
+        next=None
+    return redirect(next or f'/post/{post.id}')
 
 @app.route("/register", methods=['GET','POST'])
 def register():
@@ -92,7 +109,15 @@ def login():
 
 @app.route("/search")
 def search():
-    return render_template('search.html', title='Search')
+    search="%"+request.args.get('s')+"%"
+    post=Post.query.filter(or_(Post.content.like(search),Post.title.like(search))).all()
+    return render_template('search.html', title='Search', posts=post, search=search)
+
+@app.route("/tagged")
+@login_required
+def tagged():
+    post=Post.query.join(Tag, Post.id==Tag.post_id).filter_by(tagger_id=current_user.id).all()
+    return render_template('tagged.html', title='Tagged Posts', posts=post)
 
 @app.route("/allpost/<int:type>/<int:order>")
 def allpost(type, order):

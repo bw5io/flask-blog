@@ -14,6 +14,8 @@ class Post(db.Model):
     likes=db.Column(db.Integer, nullable=False, default=0)
     comment=db.relationship('Comment',backref='post',lazy=True)
     like=db.relationship('Like',backref='post',lazy=True)
+    tag=db.relationship('Tag',backref='post',lazy=True)
+
     def __repr__(self):
         return f"Post('{self.date}', '{self.title}', '{self.content}')"
 
@@ -26,6 +28,7 @@ class User(UserMixin, db.Model):
     post = db.relationship('Post', backref='user', lazy=True)
     comment=db.relationship('Comment',backref='user',lazy=True)
     like=db.relationship('Like',backref='user',lazy=True)
+    tag=db.relationship('Tag',backref='user',lazy=True)
     first_name = db.Column(db.String(80))
     last_name = db.Column(db.String(80))
     mobile_phone = db.Column(db.String(11))
@@ -65,6 +68,14 @@ class Like(db.Model):
     def __repr__(self):
         return f"Like('{self.id}','{self.date}')"
 
+class Tag(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    post_id=db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    tagger_id=db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Like('{self.id}','{self.date}')"
 
 @login_manager.user_loader
 def load_user(user_id):
