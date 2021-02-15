@@ -76,6 +76,10 @@ def post_tag(post_id):
 
 @app.route("/register", methods=['GET','POST'])
 def register():
+    next=request.args.get('next')
+    if current_user.is_authenticated:
+        flash("You've already logged in!")
+        return redirect(next or url_for('home'))
     form=RegistrationForm()
     if form.validate_on_submit():
         user=User(username=form.username.data,email=form.email.data,password=form.password.data,first_name=form.first_name.data,last_name=form.last_name.data,mobile_phone=form.mobile_phone.data)
@@ -83,7 +87,6 @@ def register():
         db.session.commit()
         login_user(user)
         flash("Congratulations! Your registration has completed.")
-        next=request.args.get('next')
         if not is_safe_url(next, request.url_root):
             return redirect(url_for('home'))
         return redirect(next or url_for('home'))
@@ -112,8 +115,8 @@ def login():
 @app.route("/search")
 def search():
     if request.args.get('s'):
-        search="%"+request.args.get('s')+"%"
-        post=Post.query.filter(or_(Post.content.like(search),Post.title.like(search))).all()
+        search=request.args.get('s')
+        post=Post.query.filter(or_(Post.content.like("%"+search+"%"),Post.title.like(search))).all()
         return render_template('search.html', title='Search', posts=post, search=search)
     else:
         return render_template('searchform.html', title='Search')

@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Search</h1>
+<h2>Your Tagged Posts</h2>
 {{search}}
 {%if posts%}
 {% for post in posts %}
     <p> 
-        <a href="{{url_for('post',post_id=post.id)}}">{{ post.title }}</a>  <a href="{{url_for('post_tag',post_id=post.id)}}?next={{request.path}}">Remove</a>
+        <a href="{{url_for('post',post_id=post.id)}}">{{ post.title }}</a>  <a href="{{url_for('post_tag',post_id=post.id,next=request.path)}}">Remove</a>
     </p>
     <p>
         Posted on: {{post.date}}

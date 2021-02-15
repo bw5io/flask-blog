@@ -17,6 +17,7 @@ body{
 a{
     color: white;
     text-decoration: none;
+    transition: 0.3s;
 }
 
 a:hover{
@@ -29,7 +30,10 @@ img{
     width: 100%;
 }
 
-
+h2{
+    font-size: 2em;
+    margin: 0.3em;
+}
 
 /* Grid Initialize */
 
@@ -97,16 +101,30 @@ img{
     text-transform:none;
 }
 
+#searchfield{
+    font-size: 0.8em;
+    padding: 0.1em;
+    width: 8em;
+}
+
 .btn{
     color: white;
     background-color: #1763af;
     align-self: center;
     padding: 0.6em;
+    margin: 0.6em;
     font-weight: 800;
     font-size: 1em;
     display: inline-block;
     border-radius: 0.5em;
     border: none;
+    transition: 0.3s;
+}
+
+#searchbtn{
+    padding:0.3em;
+    font-size:0.8em;
+    margin:0;
 }
 
 .btn:hover{
@@ -160,6 +178,15 @@ img{
 
 .space{
     margin: 0.6em;
+}
+
+/* Footer */
+#footer{
+    border-top: solid rgb(126, 126, 126) 1px;
+    display: inline-block;
+    padding: 0.1em 3em;
+    margin: 0.5em;
+    width: auto;
 }
 
 /* Flash Warning */

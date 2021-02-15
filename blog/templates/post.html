@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 <img src="{{ url_for('static', filename='img/' + post.image_file)}}">
-<h1>{{ post.title }}</h1>
+<h2>{{ post.title }}</h2>
 <p id="main_text">{{ post.content }}</p>
 
 <!-- Comment Section -->
 
-<h1>Comments</h1>
+<h2>Comments</h2>
 
 {% for comment in comments %}
 
@@ -27,7 +27,7 @@
      </div>
 </form>
 {% else %}
-<p>You need to <a href="{{ url_for('login')+'?next='+request.path }}">Log In</a> to post comment.</p>
+<p>You need to <a href="{{ url_for('login',next=request.path) }}">Log In</a> to post comment.</p>
 {% endif %}
 {% endblock content %}
 
@@ -41,7 +41,7 @@
     {%endif%}
     <p><a href="{{url_for('post_tag',post_id=post.id)}}">{%if tag!=None%}Remove {%endif%}Tag</a></p>    
     {%else%}
-    <p><a href="{{ url_for('login')+'?next='+request.path }}">Log In</a> to Like or Tag.</p>
+    <p><a href="{{ url_for('login',next=request.path) }}">Log In</a> to Like or Tag.</p>
     {%endif%}
     <p><strong>Posted on:</strong>  <script>document.write(moment("{{post.date}}").format("LL"));</script></p>
     <p><strong>Author:</strong> {{post.user.username}}</p>

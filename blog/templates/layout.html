@@ -11,25 +11,26 @@
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+        <script src="https://kit.fontawesome.com/fbff42ae6f.js" crossorigin="anonymous"></script>
         <script src="{{url_for('static',filename='moment.js')}}"></script>
     </head>
     <body>
         <div class="grid-container">
             <div id="navi">
                 <h1>Bill's Blog</h1>
-                <form action="/search" method="get">
-                    <input type="search" name="s" id="s">
-                    <input type="submit" value="Search">
+                <form action="{{url_for('search')}}" method="get">
+                    <input type="search" name="s" class="inputline" id="searchfield" placeholder="search">
+                    <button class="btn" id="searchbtn"><i class="fas fa-search"></i></button>
                 </form>
                 <ul>
                     {%if current_user.is_authenticated%}
                     <li>Welcome, {{current_user.username}}!</li>
-                    <li><a href="{{url_for('logout')+'?next='+request.path }}">Log Out</a></li>
+                    <li><a href="{{url_for('logout',next=request.path)}}">Log Out</a></li>
                     <li><a href="{{url_for('tagged')}}">Tagged</a></li>
                 {%else%}
                     <li>Welcome, Guest!</li>
-                    <li><a href="{{ url_for('register')+'?next='+request.path}}">Register</a></li>
-                    <li><a href="{{ url_for('login')+'?next='+request.path }}">Log In</a></li>
+                    <li><a href="{{ url_for('register',next=request.path) }}">Register</a></li>
+                    <li><a href="{{ url_for('login',next=request.path )}}">Log In</a></li>
                 {%endif%}
                     <li>------------</li>
                     <li><a href="{{url_for('home')}}">Home</a></li>
@@ -43,6 +44,15 @@
             </div>
             <div id="main">
                 {% block content %} {% endblock content%}
+                <div id="footer">
+                    <p>Bill Wu 2021</p>
+                    <p>
+                        <a href="https://github.com/ibillwu">Github</a>
+                        <a href="https://www.linkedin.com/in/ibillwu/">LinkedIn</a>
+                        <a href="https://www.facebook.com">Facebook</a>
+                        <a href="https://twitter.com/ibillwu">Twitter</a>
+                    </p>
+                </div>
             </div>
             <div id="sidebar">
                 {% block sidebar %} {% endblock sidebar%}

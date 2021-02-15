@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Search</h1>
-{{search}}
+<h2>Search result for {{search}}</h2>
 {%if posts%}
 {% for post in posts %}
     <p> 

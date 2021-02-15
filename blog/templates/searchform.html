@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Search</h1>
-<form action="/search" method="get">
-    <input type="search" name="s" id="s">
-    <input type="submit" value="Search">
+<div class="formpage">
+<h2>Search</h2>
+<form action="{{url_for('search')}}" method="get">
+    <input type="search" name="s" class="inputline"  placeholder="search">
+    <button class="btn" ><i class="fas fa-search"></i></button>
 </form>
+</div>
 {% endblock content %}
