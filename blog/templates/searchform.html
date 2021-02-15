@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Search</h1>
+<form action="/search" method="get">
+    <input type="search" name="s" id="s">
+    <input type="submit" value="Search">
+</form>
+{% endblock content %}

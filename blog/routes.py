@@ -4,7 +4,7 @@ from sqlalchemy import desc, or_
 from is_safe_url import is_safe_url
 from blog import app, db
 from blog.models import User, Post, Comment, Like, Tag
-from blog.forms import RegistrationForm, LoginForm, CommentForm
+from blog.forms import RegistrationForm, LoginForm, CommentForm, SearchForm
 from blog.functions import flash_errors
 
 @app.route("/")
@@ -23,10 +23,12 @@ def post(post_id):
     comments = Comment.query.filter(Comment.post_id == post.id)
     if current_user.is_authenticated:
         like=Like.query.filter(Like.post_id==post.id, Like.liker_id==current_user.id).first()
+        tag=Tag.query.filter(Tag.post_id==post.id, Tag.tagger_id==current_user.id).first()
     else:
         like=None
+        tag=None
     form = CommentForm()
-    return render_template('post.html',title=post.title, post=post, form=form, comments=comments, like=like)
+    return render_template('post.html',title=post.title, post=post, form=form, comments=comments, like=like, tag=tag)
 
 @app.route('/post/<int:post_id>/comment', methods=['GET', 'POST']) 
 @login_required
@@ -109,9 +111,12 @@ def login():
 
 @app.route("/search")
 def search():
-    search="%"+request.args.get('s')+"%"
-    post=Post.query.filter(or_(Post.content.like(search),Post.title.like(search))).all()
-    return render_template('search.html', title='Search', posts=post, search=search)
+    if request.args.get('s'):
+        search="%"+request.args.get('s')+"%"
+        post=Post.query.filter(or_(Post.content.like(search),Post.title.like(search))).all()
+        return render_template('search.html', title='Search', posts=post, search=search)
+    else:
+        return render_template('searchform.html', title='Search')
 
 @app.route("/tagged")
 @login_required

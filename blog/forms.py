@@ -33,3 +33,7 @@ class LoginForm(FlaskForm):
 class CommentForm(FlaskForm):
     comment = TextAreaField('Comment', validators=[InputRequired()], render_kw={"placeholder":"Input Comment Here."})
     submit = SubmitField('Post comment')
+
+class SearchForm(FlaskForm):
+    search = StringField("Search", validators=[DataRequired()],render_kw={"placeholder":"Search Articles Here"})
+    submit = SubmitField("Search")

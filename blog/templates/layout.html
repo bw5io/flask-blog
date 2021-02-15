@@ -17,6 +17,10 @@
         <div class="grid-container">
             <div id="navi">
                 <h1>Bill's Blog</h1>
+                <form action="/search" method="get">
+                    <input type="search" name="s" id="s">
+                    <input type="submit" value="Search">
+                </form>
                 <ul>
                     {%if current_user.is_authenticated%}
                     <li>Welcome, {{current_user.username}}!</li>
