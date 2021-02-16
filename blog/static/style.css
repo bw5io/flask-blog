@@ -17,7 +17,6 @@ body{
 a{
     color: white;
     text-decoration: none;
-    transition: 0.3s;
 }
 
 a:hover{
@@ -37,35 +36,38 @@ h2{
 
 /* Grid Initialize */
 
-.grid-container{
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-gap: 1em;
+#topnav{
+    background: yellow;
+}
+
+.navibar{
+    visibility: hidden;
+    position: fixed;
+}
+
+.navivis{
+    position: fixed;
+    background: rgba(0,0,0,90%);
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
-}
-
-#navi{
-    grid-column: 1/2;
-    text-align: right;
-    padding-top: 20vh;
-}
-
-#navi ul{
-    list-style: none;
+    padding: 30% 0;
+    text-align: center;
+    font-size: 1.3em;
 }
 
 #main{
-    grid-column: 2/3;
+    overflow: auto;
     text-align: center;
-    overflow: scroll;
+
 }
 
 #sidebar{
-    padding-top: 24vh;
-    grid-column:3/4;
-    text-align: left;
+    visibility: hidden;
+    position: fixed;
+}
+
+.navi ul{
+    list-style: none;
 }
 
 .middle{ 
@@ -118,7 +120,6 @@ h2{
     display: inline-block;
     border-radius: 0.5em;
     border: none;
-    transition: 0.3s;
 }
 
 #searchbtn{
@@ -164,6 +165,8 @@ h2{
 
 #main_text{
     text-align:justify;
+    margin:auto;
+    width: 90%
 }
 
 .comment{
@@ -216,10 +219,42 @@ h2{
     transform: translate(-50%, -50%);
 }
 
-@media (max-width: 900px){
+@media (min-width: 900px) 
+{   
     .grid-container{
-        height: 90vh;
-        grid-template-rows: 6fr 1fr;
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-gap: 1em;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+    
+    .navibar{
+        grid-column: 1/2;
+        text-align: right;
+        padding-top: 20vh;
+        visibility: visible;
+        position: unset;
+    }
+    
+    #main{
+        grid-column: 2/3;
+        overflow: scroll;
+    }
+    
+    #sidebar{
+        padding-top: 24vh;
+        grid-column:3/4;
+        text-align: left;
+        visibility: visible;
+        position: unset;
+    }
+
+    #topnav{
+        visibility: hidden;
+        position: fixed;
     }
 }
+
 

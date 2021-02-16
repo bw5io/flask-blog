@@ -13,10 +13,24 @@
         <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
         <script src="https://kit.fontawesome.com/fbff42ae6f.js" crossorigin="anonymous"></script>
         <script src="{{url_for('static',filename='moment.js')}}"></script>
+        <script>
+            function myFunction() {
+              var x = document.getElementById("navi");
+              if (x.className === "navibar") {
+                x.className = "navivis";
+              } else {
+                x.className = "navibar";
+              }
+            }
+        </script>     
     </head>
     <body>
         <div class="grid-container">
-            <div id="navi">
+            <div id="topnav">
+                <a href="javascript:void();" onclick="myFunction()">Menu</a> 
+                Bill's Blog
+            </div>
+            <div id="navi" class="navibar">
                 <h1>Bill's Blog</h1>
                 <form action="{{url_for('search')}}" method="get">
                     <input type="search" name="s" class="inputline" id="searchfield" placeholder="search">
@@ -71,6 +85,6 @@
         <script src="{{url_for('static',filename='close.js')}}"></script>
         {%endif%}
         {%endwith%}
+   
     </body>
 </html>
-
