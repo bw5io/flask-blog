@@ -144,6 +144,21 @@ h2{
     resize: none;
 }
 
+/* Content Block */
+.flexcontainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flexchild{
+    /* max-width: 20em; */
+    flex-grow: 1;
+    max-width: 15em;
+    border:rgb(126, 126, 126) solid 1px;
+    padding-bottom: 1em;
+    margin: 1em;
+}
 
 /* Post Page */
 

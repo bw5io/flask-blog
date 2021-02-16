@@ -116,7 +116,8 @@ def login():
 def search():
     if request.args.get('s'):
         search=request.args.get('s')
-        post=Post.query.filter(or_(Post.content.like("%"+search+"%"),Post.title.like(search))).all()
+        c="%"+search+"%"
+        post=Post.query.filter(or_(Post.content.like(c),Post.title.like(c))).all()
         return render_template('search.html', title='Search', posts=post, search=search)
     else:
         return render_template('searchform.html', title='Search')

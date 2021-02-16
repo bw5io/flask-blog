@@ -1,17 +1,7 @@
 {% extends "layout.html" %} 
 {% block content %}
-{% for post in posts %}
-    <p> 
-        <a href="{{url_for('post',post_id=post.id)}}">{{ post.title }}</a>  
-    </p>
-    <p>
-        Posted on: {{post.date}}
-    </p>
-    <p>
-        Likes: {{post.likes}}
-    </p>
-{% endfor %}
-
+<h2>All Posts</h2>
+{% include "flexpost.html" %}
 {% endblock content %}
 {%block sidebar%}
 <div>

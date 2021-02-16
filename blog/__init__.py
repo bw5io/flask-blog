@@ -12,6 +12,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 from blog import routes
 from blog.models import User, Post, Comment
 from blog.views import AdminView

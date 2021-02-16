@@ -1,0 +1,19 @@
+
+<div class="flexcontainer">
+    {% for post in posts %}
+    <a href="{{url_for('post',post_id=post.id)}}">
+    <div class="flexchild">
+        <img src="{{url_for('static',filename='img/'+post.image_file)}}" alt="" />
+        <p> 
+           <strong>{{ post.title }}</strong>
+        </p>
+        <p>
+            Posted on: {{post.date}}
+        </p>
+        <p>
+            Likes: {{post.likes}}
+        </p>
+    </div>
+    </a>
+{% endfor %}
+</div>
