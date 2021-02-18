@@ -11,7 +11,7 @@ from blog.functions import flash_errors
 @app.route("/home")
 def home():
     posts = Post.query.all()
-    return render_template('home.html', posts=posts)
+    return render_template('home.html', title="Bill's Blog", posts=posts)
 
 @app.route("/about")
 def about():

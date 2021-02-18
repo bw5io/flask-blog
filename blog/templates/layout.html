@@ -14,12 +14,15 @@
         <script src="https://kit.fontawesome.com/fbff42ae6f.js" crossorigin="anonymous"></script>
         <script src="{{url_for('static',filename='moment.js')}}"></script>
         <script>
-            function myFunction() {
+            function menuSwitch() {
               var x = document.getElementById("navi");
+              var y = document.getElementById("menubtn");
               if (x.className === "navibar") {
                 x.className = "navivis";
+                y.textContent="Close";
               } else {
                 x.className = "navibar";
+                y.textContent="Menu";
               }
             }
         </script>     
@@ -27,8 +30,10 @@
     <body>
         <div class="grid-container">
             <div id="topnav">
-                <a href="javascript:void();" onclick="myFunction()">Menu</a> 
-                Bill's Blog
+                <a href="javascript:void();" onclick="menuSwitch()" class="topnavbtn" id="menubtn">Menu</a>
+                <h1 class="title">Bill's Blog</h1>
+                <a href="javascript:void();" onclick="myFunction()" class="topnavbtn">Detail</a>
+                
             </div>
             <div id="navi" class="navibar">
                 <h1>Bill's Blog</h1>

@@ -34,11 +34,29 @@ h2{
     margin: 0.3em;
 }
 
+/* Top Nav Bar */
+#topnav{
+    background: black;
+    display: flex;
+    position: fixed;
+    flex-wrap:nowrap;
+    width: 100%;
+    z-index: 1;
+    align-items: center;
+}
+
+.topnavbtn{
+    padding: 0.5em;
+}
+
+.title{
+    flex-grow:3;
+    text-align:center;
+}
+
 /* Grid Initialize */
 
-#topnav{
-    background: yellow;
-}
+
 
 .navibar{
     visibility: hidden;
@@ -58,7 +76,7 @@ h2{
 #main{
     overflow: auto;
     text-align: center;
-
+    padding-top: 3em;
 }
 
 #sidebar{
@@ -66,7 +84,7 @@ h2{
     position: fixed;
 }
 
-.navi ul{
+#navi ul{
     list-style: none;
 }
 
@@ -78,7 +96,7 @@ h2{
     text-transform: none;
 }
 
-.navi li{
+#navi li{
     text-align: right;
     font-size: 1.2em;
 }
@@ -240,7 +258,9 @@ h2{
     
     #main{
         grid-column: 2/3;
-        overflow: scroll;
+        overflow-y: auto;
+        overflow-x:hidden;
+        padding-top: 0;
     }
     
     #sidebar{
