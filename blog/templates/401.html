@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="formpage">
+    <h1>401 Not Authorised</h1>
+    <p>The resource you are accessing require login.</p>
+    <p>You might want to <a href="{{url_for("login")}}">Log in</a> or <a href="{{url_for("register")}}">Register</a>.</p>
+</div>
+{% endblock %}

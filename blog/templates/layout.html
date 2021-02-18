@@ -30,9 +30,8 @@
     <body>
         <div class="grid-container">
             <div id="topnav">
-                <a href="javascript:void();" onclick="menuSwitch()" class="topnavbtn" id="menubtn">Menu</a>
                 <h1 class="title">Bill's Blog</h1>
-                <a href="javascript:void();" onclick="myFunction()" class="topnavbtn">Detail</a>
+                <a href="javascript:void();" onclick="menuSwitch()" class="topnavbtn" id="menubtn">Menu</a>
                 
             </div>
             <div id="navi" class="navibar">
@@ -59,22 +58,21 @@
                     <li>------------</li>
                     <li><a href="/admin">Admin Panel</a></li>
                 {% endif %}
+                    <li>------------</li>
+                    <li>Bill Wu 2021</li>
+                    <li><a href="https://github.com/ibillwu">Github</a></li>
+                    <li><a href="https://www.linkedin.com/in/ibillwu/">LinkedIn</a></li>
+                    <li><a href="https://www.facebook.com">Facebook</a></li>
+                    <li><a href="https://twitter.com/ibillwu">Twitter</a></li>
                 </ul>
             </div>
             <div id="main">
                 {% block content %} {% endblock content%}
-                <div id="footer">
-                    <p>Bill Wu 2021</p>
-                    <p>
-                        <a href="https://github.com/ibillwu">Github</a>
-                        <a href="https://www.linkedin.com/in/ibillwu/">LinkedIn</a>
-                        <a href="https://www.facebook.com">Facebook</a>
-                        <a href="https://twitter.com/ibillwu">Twitter</a>
-                    </p>
-                </div>
+
             </div>
             <div id="sidebar">
                 {% block sidebar %} {% endblock sidebar%}
+
             </div>
         </div>
         {% with messages = get_flashed_messages() %}

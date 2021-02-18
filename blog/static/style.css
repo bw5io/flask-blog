@@ -51,7 +51,8 @@ h2{
 
 .title{
     flex-grow:3;
-    text-align:center;
+    text-align:left;
+    padding-left: 0.3em;
 }
 
 /* Grid Initialize */
@@ -80,8 +81,8 @@ h2{
 }
 
 #sidebar{
-    visibility: hidden;
-    position: fixed;
+    position: relative;
+    text-align: center;
 }
 
 #navi ul{
@@ -97,7 +98,6 @@ h2{
 }
 
 #navi li{
-    text-align: right;
     font-size: 1.2em;
 }
 
@@ -106,8 +106,7 @@ h2{
     display: inline-block;
     width: 10em;
     color: white;
-    margin-right: 3em;
-    text-align: right;
+    text-align: middle;
 }
 
 .inputline{
@@ -263,6 +262,10 @@ h2{
         padding-top: 0;
     }
     
+    #navi li{
+        font-size: unset;
+    }
+
     #sidebar{
         padding-top: 24vh;
         grid-column:3/4;
@@ -274,6 +277,11 @@ h2{
     #topnav{
         visibility: hidden;
         position: fixed;
+    }
+
+    .lb{
+        margin-right: 3em;
+        text-align: right;
     }
 }
 

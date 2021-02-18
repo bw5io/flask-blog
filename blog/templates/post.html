@@ -34,7 +34,7 @@
 {% endblock content %}
 
 {%block sidebar%}
-    <p id="likenumber">{{post.likes}}</p>
+    <p><span id="likenumber">{{post.likes}}</span>&nbsp;likes</p>
     {%if current_user.is_authenticated%}
     {%if like == None%}
     <p><a href="{{url_for('post_like',post_id=post.id)}}">Like</a></p>

@@ -157,3 +157,11 @@ def logout():
     if not is_safe_url(next, request.url_root):
         return redirect(url_for('home'))
     return redirect(next or url_for('home'))
+
+@app.errorhandler(404)
+def e_404_not_found(e):
+    return render_template("404.html")
+
+@app.errorhandler(401)
+def e_401_not_found(e):
+    return render_template("401.html")
